@@ -1,0 +1,3 @@
+-- UPDATE users
+-- SET user_name = "HARRY"
+-- WHERE user_id = 1;

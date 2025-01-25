@@ -39,12 +39,10 @@ public class Users implements UserDetails {
     @Column(name = "user_id")
     private Long userId;
 
-    @Nonnull
     @Size(min = 2, max = 50)
     @Column(name = "first_name")
     private String firstName;
 
-    @Nonnull
     @Size(min = 2, max = 50)
     @Column(name = "last_name")
     private String lastName;
@@ -58,7 +56,6 @@ public class Users implements UserDetails {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Nonnull
     @Size(min = 8, max = 100) // Example length for password, adjust based on your security standards
     @Column(name = "password")
     private String password;
@@ -66,17 +63,16 @@ public class Users implements UserDetails {
     @Column(name = "login_otp")
     private String loginOtp;
 
-    @Column(name = "verification_otp")
-    private String otp;
+    transient @Column(name = "temparay_Login_verification_otp") private String otp;
 
     @Column(name = "login_otp_expiration")
     private LocalDateTime loginOtpExpiration;
 
-    @Column(name = "verification_otp_expiration")
-    private LocalDateTime otpExpiration;
+    // @Column(name = "verification_otp_expiration")
+    // private LocalDateTime otpExpiration;
 
-    @Column(name = "verified")
-    private boolean verified;
+    // @Column(name = "verified")
+    // private boolean verified;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
@@ -105,6 +101,11 @@ public class Users implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
     }
 
 }

@@ -10,19 +10,19 @@ import com.nearPg.Authentication_NearPg.responses.RegisterResponse;
 
 public interface UsersService {
 
-    RegisterResponse register(RegisterRequest registerRequest);
+    // RegisterResponse register(RegisterRequest registerRequest);
 
     String generateOTP();
 
     void sendEmailVerification(String email, String otp);
 
-    void verify(String email, String otp);
+    // void verify(String email, String otp);
 
     LoginResponse login(LoginRequest LoginRequest);
 
     LoginResponse verifyLoginOTP(@RequestParam String email, @RequestParam String otp);
 
-    String resendVerificationOtp(String email);
+    // String resendVerificationOtp(String email);
 
     String resendLoginOtp(String email);
 

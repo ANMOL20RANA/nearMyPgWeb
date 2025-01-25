@@ -27,24 +27,6 @@ public class AuthController {
         this.usersService = usersService;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
-        RegisterResponse registerResponse = usersService.register(registerRequest);
-        return new ResponseEntity<>(registerResponse, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/verified")
-    public ResponseEntity<?> verifyUser(@RequestParam String email, @RequestParam String otp) {
-        try {
-            usersService.verify(email, otp);
-            return new ResponseEntity<>("User verified Successfully", HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-
-        }
-
-    }
-
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
@@ -66,16 +48,6 @@ public class AuthController {
         } catch (RuntimeException ex) {
             // Return error response if something goes wrong
             return new ResponseEntity<>(new LoginResponse(ex.getMessage(), "Jwt Token Failed"), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PostMapping("/resend-verification-otp")
-    public ResponseEntity<String> resendVerificationOtp(@RequestParam String email) {
-        try {
-            String responseMessage = usersService.resendVerificationOtp(email);
-            return ResponseEntity.ok(responseMessage);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 

@@ -20,6 +20,7 @@ public class SecurityConfig {
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
                 http
+                                .securityMatcher("/api/**")
                                 .csrf(csrf -> csrf.disable())
                                 .authorizeHttpRequests(
                                                 auth -> auth
